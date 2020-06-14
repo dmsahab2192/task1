@@ -1,0 +1,9 @@
+\\creation of s3 bucket
+resource "aws_s3_bucket" "t1bucket" {
+	bucket = "task1_buc"
+	acl = "private"
+    force_destroy = "true"  
+    versioning {
+		enabled = true
+	}
+}
