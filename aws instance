@@ -1,0 +1,18 @@
+// Launching The Instance
+
+resource "aws_instance" "task1" {
+	depends_on = [aws_security_group.t1sec-gp,]
+	ami           = "ami-0447a12f28fddb066"
+	instance_type = "t2.micro"
+	key_name = aws_key_pair.key.key_name
+	security_groups = [ "t1sec-gp" ]
+
+
+// Connecting to the instance
+
+	connection {
+		type     = "ssh"
+		user     = "ec2-user"
+		private_key = tls_private_key.t1key.private_key_pem
+		host     = aws_instance.task1.public_ip
+	}
