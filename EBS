@@ -1,0 +1,10 @@
+// Launching a persistant EBS volume 
+
+
+resource "aws_ebs_volume" "task1-vol" {
+	availability_zone = aws_instance.task1.availability_zone
+	size              = 1
+	tags = {
+		Name = "task1-vol"
+	}
+}
