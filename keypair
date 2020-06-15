@@ -1,0 +1,21 @@
+provider "aws" {
+	region = "ap-south-1"
+	profile = "dmsahab"
+}
+
+
+//Generating Key pair
+
+
+resource "tls_private_key" "t1key" {
+algorithm = "RSA"
+}
+
+
+resource "aws_key_pair" "key" {
+key_name = "t1"
+public_key = tls_private_key.t1key.public_key_openssh
+
+
+depends_on = [ tls_private_key.t1key,]
+}
