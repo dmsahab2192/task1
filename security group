@@ -1,0 +1,39 @@
+//creating the security group
+
+
+resource "aws_security_group" "t1sec-gp" {
+    depends_on = [aws_key_pair.key,]
+	name = "t1sec-gp"
+	description = "SSH and HTTP"
+
+
+	ingress {
+		description = "SSH"
+		from_port = 22
+		to_port = 22
+		protocol = "tcp"
+		cidr_blocks = [ "0.0.0.0/0" ]
+	}
+
+	ingress {
+		description = "HTTP"
+		from_port = 80
+		to_port = 80
+		protocol = "tcp"
+		cidr_blocks = [ "0.0.0.0/0" ]
+	}
+
+
+	egress {
+		from_port = 0
+		to_port = 0
+		protocol = "-1"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+
+
+	tags = {
+		Name = "t1sec-gp"
+	}
+}
+
